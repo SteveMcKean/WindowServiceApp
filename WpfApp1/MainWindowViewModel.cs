@@ -1,5 +1,4 @@
-﻿using System.Windows.Media;
-using Core;
+﻿using Core;
 
 namespace WpfApp1;
 
