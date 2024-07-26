@@ -13,7 +13,7 @@ public static class WindowCloser
         {
             window.Loaded += (sender, args) =>
                 {
-                    if (window.DataContext is ICloseWindow closeable)
+                    if (window.DataContext is IWindowCloser closeable)
                     {
                         closeable.Close += () => window.Close();
                     }
@@ -21,7 +21,7 @@ public static class WindowCloser
             
             window.Closing += (sender, args) =>
                 {
-                    if (window.DataContext is ICloseWindow closeable)
+                    if (window.DataContext is IWindowCloser closeable)
                     {
                         args.Cancel = !closeable.CanClose();
                     }

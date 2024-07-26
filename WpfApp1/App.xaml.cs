@@ -32,7 +32,7 @@ public partial class App : Application
     private void ConfigureServices(ServiceCollection serviceCollection)
     {
         serviceCollection.AddSingleton<IDialogService, DialogService>();
-        serviceCollection.AddSingleton<MainWindowViewModel>();
+        serviceCollection.AddSingleton<MainWindowCloserViewModel>();
         serviceCollection.AddSingleton<MainWindow>();
         serviceCollection.AddSingleton<ITimeService, TimeService>();
         serviceCollection.AddTransient<NotificationViewModel>();

@@ -2,7 +2,7 @@
 
 namespace WpfApp1;
 
-public class MainWindowViewModel: BindableBase, ICloseWindow
+public class MainWindowCloserViewModel: BindableBase, IWindowCloser
 {
     private readonly IDialogService dialogService;
     
@@ -11,7 +11,7 @@ public class MainWindowViewModel: BindableBase, ICloseWindow
     
     public Action Close { get; set; }
     
-    public MainWindowViewModel(IDialogService dialogService, IEventAggregator eventAggregator)
+    public MainWindowCloserViewModel(IDialogService dialogService, IEventAggregator eventAggregator)
     {
         this.dialogService = dialogService;
         ShowDialogCommand = new DelegateCommand(ExecuteShowDialog);
