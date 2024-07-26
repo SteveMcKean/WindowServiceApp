@@ -35,7 +35,9 @@ public static class ViewModelLocator
         
         var viewAssemblyName = viewType.Assembly.FullName;
         var viewModelName = $"{viewName}ViewModel, {viewAssemblyName}";
-
+        
+        viewModelName = viewModelName.Replace("Views", "ViewModels");
+        
         var viewModelType = Type.GetType(viewModelName);
         if (viewModelType == null)
         {

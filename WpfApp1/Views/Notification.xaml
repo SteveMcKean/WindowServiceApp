@@ -1,0 +1,26 @@
+﻿<UserControl
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    mc:Ignorable="d"
+    x:Class="WpfApp1.Views.Notification"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WpfApp1"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <TextBlock
+            FontSize="60"
+            HorizontalAlignment="Center"
+            Text="This is a notification "
+            VerticalAlignment="Center" />
+        <TextBlock Margin="10" Text="{Binding CurrentTime, Mode=TwoWay}" />
+
+        <Button
+            Click="ButtonBase_OnClick"
+            Height="30"
+            Width="90">
+            Close Me
+        </Button>
+    </StackPanel>
+</UserControl>

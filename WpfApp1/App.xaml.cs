@@ -2,6 +2,8 @@
 using System.Data;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
+using WpfApp1.ViewModels;
+using WpfApp1.Views;
 
 namespace WpfApp1;
 
@@ -32,7 +34,7 @@ public partial class App : Application
     private void ConfigureServices(ServiceCollection serviceCollection)
     {
         serviceCollection.AddSingleton<IDialogService, DialogService>();
-        serviceCollection.AddSingleton<MainWindowCloserViewModel>();
+        serviceCollection.AddSingleton<MainWindowViewModel>();
         serviceCollection.AddSingleton<MainWindow>();
         serviceCollection.AddSingleton<ITimeService, TimeService>();
         serviceCollection.AddTransient<NotificationViewModel>();

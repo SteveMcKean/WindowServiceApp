@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WpfApp1;
+namespace WpfApp1.Views;
 
 public partial class DialogWindow : Window
 {

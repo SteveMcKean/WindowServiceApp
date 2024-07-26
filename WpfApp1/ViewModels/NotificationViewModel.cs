@@ -1,4 +1,4 @@
-﻿namespace WpfApp1;
+﻿namespace WpfApp1.ViewModels;
 
 public class NotificationViewModel: BindableBase
 {
