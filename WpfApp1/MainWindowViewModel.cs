@@ -2,18 +2,33 @@
 
 namespace WpfApp1;
 
-public class MainWindowViewModel: BindableBase
+public class MainWindowViewModel: BindableBase, ICloseWindow
 {
     private readonly IDialogService dialogService;
     
     public DelegateCommand ShowDialogCommand { get; set; }
-
+    public DelegateCommand CloseWindowCommand { get; set; }
+    
+    public Action Close { get; set; }
+    
     public MainWindowViewModel(IDialogService dialogService, IEventAggregator eventAggregator)
     {
         this.dialogService = dialogService;
         ShowDialogCommand = new DelegateCommand(ExecuteShowDialog);
+        CloseWindowCommand = new DelegateCommand(OncloseWindow);
         
         eventAggregator.GetEvent<MessageSentEvent>().Subscribe(OnNotification);
+        
+    }
+
+    public bool CanClose()
+    {
+        return true;
+    }
+    
+    private void OncloseWindow()
+    {
+        Close?.Invoke();
         
     }
 
@@ -31,4 +46,6 @@ public class MainWindowViewModel: BindableBase
                 
             });
     }
+
+    
 }

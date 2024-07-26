@@ -40,7 +40,6 @@ public class DialogService : IDialogService
         if (vmType != null)
         {
             var viewModel = ServiceProvider.GetRequiredService(vmType);
-            //var viewModel = Activator.CreateInstance(vmType);
             (content as FrameworkElement).DataContext = viewModel;
             
         }

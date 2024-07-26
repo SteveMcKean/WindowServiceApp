@@ -1,13 +1,38 @@
-﻿<Window x:Class="WpfApp1.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp1"
-        local:ViewModelLocator.AutoWireViewModel="True"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+﻿<Window
+    Height="450"
+    Title="MainWindow"
+    Width="800"
+    attached:WindowCloser.EnableWindowClosing="True"
+    local:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d"
+    x:Class="WpfApp1.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:attached="clr-namespace:WpfApp1.Attached"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WpfApp1"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid>
-        <Button Content="Open Dialog" Command="{Binding ShowDialogCommand}" Height="30" Width="90" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Button
+            Command="{Binding ShowDialogCommand}"
+            Content="Open Dialog"
+            Height="30"
+            HorizontalAlignment="Center"
+            Margin="5"
+            VerticalAlignment="Center"
+            Width="90" />
+
+        <Button
+            Command="{Binding CloseWindowCommand}"
+            Content="Close"
+            Grid.Row="1"
+            Height="28"
+            HorizontalAlignment="Center"
+            Width="auto" />
     </Grid>
 </Window>
