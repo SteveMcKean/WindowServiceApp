@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheInvalidationService", "CacheInvalidationService\CacheInvalidationService.csproj", "{908656D3-6022-472D-A4C3-7A72CFEFF997}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Redis", "Redis", "{AF60AC12-8967-402D-803D-C1195C9E9137}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,10 @@ Global
 		{908656D3-6022-472D-A4C3-7A72CFEFF997}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{908656D3-6022-472D-A4C3-7A72CFEFF997}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{908656D3-6022-472D-A4C3-7A72CFEFF997}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{908656D3-6022-472D-A4C3-7A72CFEFF997} = {AF60AC12-8967-402D-803D-C1195C9E9137}
+		{501016AE-57DB-4602-A558-7CED524BCD48} = {AF60AC12-8967-402D-803D-C1195C9E9137}
+		{F0D1FFE9-1288-4F15-94CB-2F583AB1A2D2} = {AF60AC12-8967-402D-803D-C1195C9E9137}
 	EndGlobalSection
 EndGlobal

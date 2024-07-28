@@ -14,8 +14,8 @@ public class NotificationViewModel: BindableBase
     public NotificationViewModel(ITimeService timeService)
     {
         this.timeService = timeService;
-        
         CurrentTime = timeService.GetTime().ToString();
+        
     }
     
 }
