@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <PackageReference Include="Prism.Core" Version="9.0.401-pre" />
+      <PackageReference Include="StackExchange.Redis" Version="2.8.0" />
     </ItemGroup>
 
 </Project>
