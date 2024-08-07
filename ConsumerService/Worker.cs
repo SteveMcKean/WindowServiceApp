@@ -12,6 +12,7 @@ public class Worker : BackgroundService
     
     private static readonly ConnectionMultiplexer Connection = 
         ConnectionMultiplexer.Connect(ConnectionString);
+    
     public Worker(ILogger<Worker> logger)
     {
         this.logger = logger;

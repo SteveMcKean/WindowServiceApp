@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using WpfApp1.Views;
+using DialogWindow = WpfApp1.Views.DialogWindow;
 
 namespace WpfApp1;
 

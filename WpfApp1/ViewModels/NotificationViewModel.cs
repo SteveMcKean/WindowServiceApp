@@ -1,9 +1,12 @@
-﻿namespace WpfApp1.ViewModels;
+﻿using Core;
+
+namespace WpfApp1.ViewModels;
 
 public class NotificationViewModel: BindableBase
 {
     private readonly ITimeService timeService;
     private string currentTime;
+    private readonly CustomDynamic dynamic;
 
     public string CurrentTime
     {
@@ -16,6 +19,13 @@ public class NotificationViewModel: BindableBase
         this.timeService = timeService;
         CurrentTime = timeService.GetTime().ToString();
         
+        dynamic = new CustomDynamic
+            {
+                ["FirstName"] = "John",
+                ["LastName"] = "Doe"
+            };
+
+        CurrentTime = dynamic.ToString();
     }
-    
+  
 }
