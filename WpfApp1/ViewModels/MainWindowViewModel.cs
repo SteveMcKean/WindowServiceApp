@@ -9,7 +9,9 @@ public class MainWindowViewModel: BindableBase, IWindowCloser
     public DelegateCommand ShowDialogCommand { get; set; }
     public DelegateCommand CloseWindowCommand { get; set; }
     
+    public CpiSkuDimensionVariant InputDimVar { get; set; }
     public Action Close { get; set; }
+    public string Sku = "1234";
     
     public MainWindowViewModel(IDialogService dialogService, IEventAggregator eventAggregator)
     {
@@ -18,6 +20,7 @@ public class MainWindowViewModel: BindableBase, IWindowCloser
         CloseWindowCommand = new DelegateCommand(OncloseWindow);
         
         eventAggregator.GetEvent<MessageSentEvent>().Subscribe(OnNotification);
+        InputDimVar = new CpiSkuDimensionVariant();
         
     }
 
@@ -39,12 +42,27 @@ public class MainWindowViewModel: BindableBase, IWindowCloser
 
     private void ExecuteShowDialog()
     {
-        
-        dialogService.ShowDialog<NotificationViewModel>(result =>
+        // dialogService.ShowDialog<NotificationViewModel, bool>((result, viewModel) =>
+        //     {
+        //         if (result)
+        //         {
+        //             InputDimVar.OverrideAspectRatio = viewModel.SelectedCpiSkuDimensionVariant.OverrideAspectRatio;
+        //         }
+        //
+        //         return result;
+        //     }, new { SelectedCpiSkuDimensionVariant = InputDimVar, SelectedSku = Sku });
+        //
+        dialogService.ShowDialog("TestDialogView", result =>
             {
                 var test = result;
                 
             });
+        
+        // dialogService.ShowDialog<NotificationViewModel>(result =>
+        //     {
+        //         var test = result;
+        //         
+        //     }, new { SelectedCpiSkuDimensionVariant = InputDimVar, SelectedSku = Sku });
     }
 
     
