@@ -1,25 +1,27 @@
 ﻿<UserControl
-    d:DesignHeight="300"
-    d:DesignWidth="300"
-    mc:Ignorable="d"
     x:Class="WpfApp1.Views.Notification"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attached="clr-namespace:WpfApp1.Attached"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WpfApp1"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    attached:WindowCloser.EnableWindowClosing="True"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    mc:Ignorable="d">
     <StackPanel>
         <TextBlock
-            FontSize="60"
             HorizontalAlignment="Center"
-            Text="This is a notification "
-            VerticalAlignment="Center" />
+            VerticalAlignment="Center"
+            FontSize="60"
+            Text="This is a notification " />
         <TextBlock Margin="10" Text="{Binding CurrentTime, Mode=TwoWay}" />
 
         <Button
-            Click="ButtonBase_OnClick"
+            Width="90"
             Height="30"
-            Width="90">
+            Command="{Binding CloseWindowCommand}">
             Close Me
         </Button>
     </StackPanel>

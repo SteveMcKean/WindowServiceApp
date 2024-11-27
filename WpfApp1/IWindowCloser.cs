@@ -2,7 +2,7 @@
 
 public interface IWindowCloser
 {
-    Action Close { get; set; }
+    Action? Close { get; set; }
     bool CanClose();
 
 }

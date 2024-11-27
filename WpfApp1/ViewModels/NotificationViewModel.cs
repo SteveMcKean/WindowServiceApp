@@ -2,13 +2,14 @@
 
 namespace WpfApp1.ViewModels;
 
-public class NotificationViewModel: BindableBase
+public class NotificationViewModel: BindableBase, IWindowCloser
 {
     private readonly ITimeService timeService;
     private string currentTime;
     private readonly CustomDynamic dynamic;
 
     public bool DialogResult { get; set; }
+    public DelegateCommand CloseWindowCommand { get; set; }
 
     public CpiSkuDimensionVariant SelectedCpiSkuDimensionVariant { get; set; }
     public string SelectedSku { get; set; }
@@ -18,19 +19,21 @@ public class NotificationViewModel: BindableBase
         get => currentTime;
         set => SetProperty(ref currentTime, value);
     }
+    
+    public Action? Close { get; set; }
 
-    // public NotificationViewModel(ITimeService timeService)
-    // {
-    //     this.timeService = timeService;
-    //     CurrentTime = timeService.GetTime().ToString();
-    //     
-    //     dynamic = new CustomDynamic
-    //         {
-    //             ["FirstName"] = "John",
-    //             ["LastName"] = "Doe"
-    //         };
-    //     
-    //     CurrentTime = dynamic.ToString();
-    // }
-  
+    public NotificationViewModel()
+    {
+        CloseWindowCommand = new DelegateCommand(OnCloseWindow);
+    }
+
+    public void OnCloseWindow()
+    {
+        Close?.Invoke();
+    }
+
+    public bool CanClose()
+    {
+        return true;
+    }
 }
