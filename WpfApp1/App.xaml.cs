@@ -26,19 +26,20 @@ public partial class App : Application
         ViewModelLocator.ServiceProvider = ServiceProvider;
         DialogService.ServiceProvider = ServiceProvider;
         
-        var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+        var mainWindow = ServiceProvider.GetRequiredService<MainWindowView>();
         mainWindow.Show();
         
     }
 
-    private void ConfigureServices(ServiceCollection serviceCollection)
+    private static void ConfigureServices(ServiceCollection serviceCollection)
     {
         serviceCollection.AddSingleton<IDialogService, DialogService>();
         serviceCollection.AddSingleton<MainWindowViewModel>();
-        serviceCollection.AddSingleton<MainWindow>();
+        serviceCollection.AddSingleton<MainWindowView>();
         serviceCollection.AddSingleton<ITimeService, TimeService>();
         serviceCollection.AddTransient<NotificationViewModel>();
         serviceCollection.AddSingleton<IEventAggregator, EventAggregator>();
+        serviceCollection.AddTransient<ChildViewModel>();
         
         DialogService.RegisterDialog<Notification, NotificationViewModel>();
        

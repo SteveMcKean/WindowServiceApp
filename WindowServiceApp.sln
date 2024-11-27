@@ -1,5 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35424.110 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{26A99496-8313-4FEF-B7C6-9B517375A66A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{685DACA1-84EC-47DF-943E-DE7B35E65BFB}"
@@ -19,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{ACBBD140-9789-46A3-A9D8-4227BC25F780}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cpi.Domain", "Cpi.Domain\Cpi.Domain.csproj", "{1BB4FCE0-F290-47D6-929E-8D85EE107088}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowServiceApp.Unit.Tests", "WindowServiceApp.Unit.Tests\WindowServiceApp.Unit.Tests.csproj", "{ABE87443-3926-4585-9C6E-BDC989C8FB42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,11 +63,18 @@ Global
 		{1BB4FCE0-F290-47D6-929E-8D85EE107088}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BB4FCE0-F290-47D6-929E-8D85EE107088}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BB4FCE0-F290-47D6-929E-8D85EE107088}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABE87443-3926-4585-9C6E-BDC989C8FB42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABE87443-3926-4585-9C6E-BDC989C8FB42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABE87443-3926-4585-9C6E-BDC989C8FB42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABE87443-3926-4585-9C6E-BDC989C8FB42}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{908656D3-6022-472D-A4C3-7A72CFEFF997} = {AF60AC12-8967-402D-803D-C1195C9E9137}
-		{501016AE-57DB-4602-A558-7CED524BCD48} = {AF60AC12-8967-402D-803D-C1195C9E9137}
 		{F0D1FFE9-1288-4F15-94CB-2F583AB1A2D2} = {AF60AC12-8967-402D-803D-C1195C9E9137}
+		{501016AE-57DB-4602-A558-7CED524BCD48} = {AF60AC12-8967-402D-803D-C1195C9E9137}
+		{908656D3-6022-472D-A4C3-7A72CFEFF997} = {AF60AC12-8967-402D-803D-C1195C9E9137}
 		{ACBBD140-9789-46A3-A9D8-4227BC25F780} = {5C8E7FE0-5941-4D80-8C5E-3A2EA9B52C8F}
 	EndGlobalSection
 EndGlobal

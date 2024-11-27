@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace WpfApp1.Attached;
 
@@ -28,8 +29,11 @@ public static class WindowCloser
                     
                 };
             
+        }else if (d is UserControl userControl)
+        {
+            AttachUserControlCloser(userControl);
         }
-        
+
     }
 
     public static void SetEnableWindowClosing(DependencyObject element, bool value)
@@ -40,5 +44,36 @@ public static class WindowCloser
     public static bool GetEnableWindowClosing(DependencyObject element)
     {
         return (bool)element.GetValue(EnableWindowClosingProperty);
+    }
+
+    private static void AttachUserControlCloser(UserControl userControl)
+    {
+        userControl.Loaded += (sender, args) =>
+            {
+                if (userControl.DataContext is IWindowCloser closeable)
+                {
+                    closeable.Close += () =>
+                        {
+                            // Find parent window and close it
+                            if (FindParentWindow(userControl) is Window window)
+                            {
+                                window.Close();
+                            }
+                        };
+                }
+            };
+    }
+
+    private static Window FindParentWindow(DependencyObject child)
+    {
+        while (child != null)
+        {
+            if (child is Window window)
+            {
+                return window;
+            }
+            child = LogicalTreeHelper.GetParent(child);
+        }
+        return null;
     }
 }

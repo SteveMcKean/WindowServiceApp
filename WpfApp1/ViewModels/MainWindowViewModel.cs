@@ -1,69 +1,72 @@
 ﻿using Core;
+using WpfApp1.Behaviors;
+using WpfApp1.Views;
 
 namespace WpfApp1.ViewModels;
 
-public class MainWindowViewModel: BindableBase, IWindowCloser
+public class MainWindowViewModel : BindableBase, IWindowCloser
 {
     private readonly IDialogService dialogService;
-    
-    public DelegateCommand ShowDialogCommand { get; set; }
+
+    public DelegateCommand<object> OpenDialogCommand { get; set; }
+
     public DelegateCommand CloseWindowCommand { get; set; }
-    
+    public DelegateCommand ShowNotificationCommand { get; set; }
+
     public CpiSkuDimensionVariant InputDimVar { get; set; }
-    public Action Close { get; set; }
-    public string Sku = "1234";
-    
+
+    public Action? Close { get; set; }
+
+    public string Sku { get; set; } = "123456";
+
     public MainWindowViewModel(IDialogService dialogService, IEventAggregator eventAggregator)
     {
         this.dialogService = dialogService;
-        ShowDialogCommand = new DelegateCommand(ExecuteShowDialog);
-        CloseWindowCommand = new DelegateCommand(OncloseWindow);
-        
+
+        OpenDialogCommand = new DelegateCommand<object>(ExecuteShowDialog);
+        CloseWindowCommand = new DelegateCommand(OnCloseWindow);
+        ShowNotificationCommand = new DelegateCommand(ShowNotification);
+
         eventAggregator.GetEvent<MessageSentEvent>().Subscribe(OnNotification);
         InputDimVar = new CpiSkuDimensionVariant();
-        
+
     }
 
     public bool CanClose()
     {
         return true;
     }
-    
-    private void OncloseWindow()
+
+    private void OnCloseWindow()
     {
         Close?.Invoke();
-        
+
     }
 
     private void OnNotification(string message)
     {
-        
+
     }
 
-    private void ExecuteShowDialog()
+    private static void ExecuteShowDialog(object parameter)
     {
-        // dialogService.ShowDialog<NotificationViewModel, bool>((result, viewModel) =>
-        //     {
-        //         if (result)
-        //         {
-        //             InputDimVar.OverrideAspectRatio = viewModel.SelectedCpiSkuDimensionVariant.OverrideAspectRatio;
-        //         }
-        //
-        //         return result;
-        //     }, new { SelectedCpiSkuDimensionVariant = InputDimVar, SelectedSku = Sku });
-        //
-        dialogService.ShowDialog("TestDialogView", result =>
+        if (parameter is WindowServiceBehavior windowService)
+        {
+            windowService.ShowDialog(new ChildViewModel());
+        }
+    }
+
+    private void ShowNotification()
+    {
+        dialogService.ShowDialog<NotificationViewModel>(result =>
             {
                 var test = result;
                 
-            });
-        
-        // dialogService.ShowDialog<NotificationViewModel>(result =>
-        //     {
-        //         var test = result;
-        //         
-        //     }, new { SelectedCpiSkuDimensionVariant = InputDimVar, SelectedSku = Sku });
+            }, new { SelectedCpiSkuDimensionVariant = InputDimVar, SelectedSku = Sku });
+
+
+       // dialogService.ShowDialog<NotificationViewModel, DialogResult>((b, model) => model.DialogResult);
+
     }
 
-    
 }

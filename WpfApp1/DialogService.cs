@@ -6,7 +6,8 @@ namespace WpfApp1;
 
 public class DialogService : IDialogService
 {
-    private static readonly Dictionary<Type,Type> Mappings = new Dictionary<Type, Type>();
+    private static readonly Dictionary<Type,Type> Mappings = new();
+
 
     public static IServiceProvider? ServiceProvider { get; set; }
 
@@ -31,7 +32,7 @@ public class DialogService : IDialogService
         ShowDialogInternal(type, callBack, typeof(TViewModel));
     }
 
-    public void ShowDialog<TViewModel, TResult>(Func<TResult, TViewModel, bool> callBack, object parameters = null) 
+    public void ShowDialog<TViewModel, TResult>(Func<TResult, TViewModel, bool> callBack, object? parameters = null) 
         where TViewModel : class, new()
     {
         if (!Mappings.TryGetValue(typeof(TViewModel), out var viewType))
@@ -80,7 +81,7 @@ public class DialogService : IDialogService
             };
 
         // Show the dialog modally and wait for it to close
-        var dialogResult = dialog.ShowDialog();
+        dialog.ShowDialog();
 
         // You need to determine how to convert the dialog's result to TResult
         // For demonstration, assume the dialog sets a property on the ViewModel
@@ -134,7 +135,12 @@ public class DialogService : IDialogService
         EventHandler? closeHandler = null;
 
         var dialog = new DialogWindow();
-        var content = (UserControl?)Activator.CreateInstance(type);
+        var content = Activator.CreateInstance(type) as UserControl;
+
+        if (content == null)
+        {
+            throw new InvalidOperationException($"The type {type.FullName} is not a UserControl.");
+        }
 
         if (vmType != null)
         {
@@ -150,26 +156,22 @@ public class DialogService : IDialogService
                     }
                 }
             }
-            
-            if (content != null)
-            {
-                content.DataContext = viewModel;
-            }
+
+            content.DataContext = viewModel;
         }
 
         dialog.Content = content;
         closeHandler = (sender, args) =>
+        {
+            dialog.Closed -= closeHandler;
+            if (dialog.DialogResult != null)
             {
-                dialog.Closed -= closeHandler;
-                if (dialog.DialogResult != null)
-                {
-                    callBack?.Invoke(dialog.DialogResult.Value);
-                }
-            };    
-        
+                callBack?.Invoke(dialog.DialogResult.Value);
+            }
+        };
+
         dialog.Closed += closeHandler;
         dialog.ShowDialog();
-        
     }
    
 }
