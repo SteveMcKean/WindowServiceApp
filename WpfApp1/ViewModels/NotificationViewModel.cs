@@ -2,7 +2,7 @@
 
 namespace WpfApp1.ViewModels;
 
-public class NotificationViewModel: BindableBase, IWindowCloser
+public class NotificationViewModel: BindableBase, ICloseWindows
 {
     private readonly ITimeService timeService;
     private string currentTime;

@@ -1,6 +1,6 @@
 ﻿namespace WpfApp1;
 
-public interface IWindowCloser
+public interface ICloseWindows
 {
     Action? Close { get; set; }
     bool CanClose();

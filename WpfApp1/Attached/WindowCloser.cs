@@ -14,7 +14,7 @@ public static class WindowCloser
         {
             window.Loaded += (sender, args) =>
                 {
-                    if (window.DataContext is IWindowCloser closeable)
+                    if (window.DataContext is ICloseWindows closeable)
                     {
                         closeable.Close += () => window.Close();
                     }
@@ -22,7 +22,7 @@ public static class WindowCloser
             
             window.Closing += (sender, args) =>
                 {
-                    if (window.DataContext is IWindowCloser closeable)
+                    if (window.DataContext is ICloseWindows closeable)
                     {
                         args.Cancel = !closeable.CanClose();
                     }
@@ -50,7 +50,7 @@ public static class WindowCloser
     {
         userControl.Loaded += (sender, args) =>
             {
-                if (userControl.DataContext is IWindowCloser closeable)
+                if (userControl.DataContext is ICloseWindows closeable)
                 {
                     closeable.Close += () =>
                         {
@@ -72,8 +72,10 @@ public static class WindowCloser
             {
                 return window;
             }
+            
             child = LogicalTreeHelper.GetParent(child);
         }
+        
         return null;
     }
 }

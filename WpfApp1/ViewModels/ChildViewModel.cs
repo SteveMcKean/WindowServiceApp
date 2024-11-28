@@ -1,6 +1,6 @@
 ﻿namespace WpfApp1.ViewModels;
 
-public class ChildViewModel: BindableBase,IWindowCloser
+public class ChildViewModel: BindableBase,ICloseWindows
 {
     public Action? Close { get; set; }
 

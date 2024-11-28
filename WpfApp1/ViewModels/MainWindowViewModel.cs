@@ -4,7 +4,7 @@ using WpfApp1.Views;
 
 namespace WpfApp1.ViewModels;
 
-public class MainWindowViewModel : BindableBase, IWindowCloser
+public class MainWindowViewModel : BindableBase, ICloseWindows
 {
     private readonly IDialogService dialogService;
 
@@ -32,10 +32,7 @@ public class MainWindowViewModel : BindableBase, IWindowCloser
 
     }
 
-    public bool CanClose()
-    {
-        return true;
-    }
+    public bool CanClose() => false;
 
     private void OnCloseWindow()
     {
@@ -52,7 +49,11 @@ public class MainWindowViewModel : BindableBase, IWindowCloser
     {
         if (parameter is WindowServiceBehavior windowService)
         {
-            windowService.ShowDialog(new ChildViewModel());
+            var value = windowService.ShowDialog(new ChildViewModel());
+            if(value == true)
+            {
+                // Do something
+            }
         }
     }
 
