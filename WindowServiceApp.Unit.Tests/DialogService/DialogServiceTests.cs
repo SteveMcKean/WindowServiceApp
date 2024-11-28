@@ -20,7 +20,7 @@ public class DialogServiceTests
     public DialogServiceTests()
     {
         serviceProvider = Substitute.For<IServiceProvider>();
-        WpfApp1.DialogService.ServiceProvider = serviceProvider;
+        WpfApp1.DialogService.ServiceProviderFactory = serviceProvider;
         dialogService = new WpfApp1.DialogService();
     }
 

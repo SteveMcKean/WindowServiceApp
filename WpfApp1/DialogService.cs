@@ -9,7 +9,7 @@ public class DialogService : IDialogService
     private static readonly Dictionary<Type,Type> Mappings = new();
 
 
-    public static IServiceProvider? ServiceProvider { get; set; }
+    public static IServiceProvider? ServiceProviderFactory { get; set; }
 
     public static void RegisterDialog<TView, TViewModel>()
     {
@@ -109,7 +109,7 @@ public class DialogService : IDialogService
 
         if (vmType != null)
         {
-            viewModel = ServiceProvider!.GetRequiredService(vmType);
+            viewModel = ServiceProviderFactory!.GetRequiredService(vmType);
             if (content != null)
             {
                 content.DataContext = viewModel;
@@ -144,7 +144,7 @@ public class DialogService : IDialogService
 
         if (vmType != null)
         {
-            var viewModel = ServiceProvider!.GetRequiredService(vmType);
+            var viewModel = ServiceProviderFactory!.GetRequiredService(vmType);
             if (parameters != null)
             {
                 foreach (var prop in parameters.GetType().GetProperties())

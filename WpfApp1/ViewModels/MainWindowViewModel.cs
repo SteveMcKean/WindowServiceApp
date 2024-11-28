@@ -32,7 +32,7 @@ public class MainWindowViewModel : BindableBase, ICloseWindows
 
     }
 
-    public bool CanClose() => false;
+    public bool CanClose() => true;
 
     private void OnCloseWindow()
     {

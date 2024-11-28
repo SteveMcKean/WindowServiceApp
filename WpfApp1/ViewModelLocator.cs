@@ -4,7 +4,7 @@ namespace WpfApp1;
 
 public static class ViewModelLocator
 {
-    public static IServiceProvider ServiceProvider { get; set; } = null!;
+    public static IServiceProvider ServiceProviderFactory { get; set; } = null!;
 
     public static bool GetAutoWireViewModel(DependencyObject obj)
     {
@@ -49,7 +49,7 @@ public static class ViewModelLocator
         }
 
         // Resolve the view model instance from the service provider
-        var viewModel = ServiceProvider.GetService(viewModelType);
+        var viewModel = ServiceProviderFactory.GetService(viewModelType);
 
         if (viewModel == null)
         {
