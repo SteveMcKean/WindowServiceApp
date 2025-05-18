@@ -45,7 +45,7 @@ jobs:
 
       # 7. Upload test results (optional)
       - name: Upload Test Results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: xunit-results
           path: '**/TestResults.trx'
