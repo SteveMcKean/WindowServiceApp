@@ -38,7 +38,7 @@ jobs:
       # 6. Run all xUnit tests
       - name: Run xUnit tests
         run: |
-          dotnet test WindowServicveapp.sln \
+          dotnet test WindowServicveApp.sln \
             --configuration Release \
             --no-build \
             --logger "trx;LogFileName=TestResults.trx"
