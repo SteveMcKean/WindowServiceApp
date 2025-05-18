@@ -2,7 +2,7 @@ name: CI · Build & Test
 
 on:
   push:
-    branches: [ master]
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -11,11 +11,9 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      # 1. Check out the code
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v3
 
-      # 2. Cache NuGet packages for faster restores
       - name: Cache NuGet packages
         uses: actions/cache@v3
         with:
@@ -23,31 +21,14 @@ jobs:
           key: nuget-${{ runner.os }}-${{ hashFiles('**/*.sln','**/*.csproj') }}
           restore-keys: nuget-${{ runner.os }}-
 
-      # 3. Restore all NuGet packages
-      - name: Restore NuGet packages
-        run: nuget restore WindowServiceApp.sln
+      - name: Restore packages
+        run: nuget restore WidowServiceApp.sln
 
-      # 4. Ensure MSBuild is available
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v1
 
-      # 5. Build your solution in Release mode
       - name: Build solution
-        run: msbuild WindowServiceApp.sln /m /p:Configuration=Release
-
-      # 6. Run all xUnit tests
-           # … previous steps …
+        run: msbuild WidowServiceApp.sln /m /p:Configuration=Release
 
       - name: Run xUnit tests
-        run: |
-          dotnet test WindeowServiceApp.sln \
-            --configuration Release \
-            --no-build \
-            --logger "trx;LogFileName=TestResults.trx"
-
-      - name: Upload Test Results
-        uses: actions/upload-artifact@v1
-        with:
-          name: xunit-results
-          path: '**/TestResults/*.trx'
-
+        run: dotnet test WidowServiceApp.sln --configuration Release --no-build
