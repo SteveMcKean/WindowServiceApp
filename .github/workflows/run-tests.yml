@@ -36,16 +36,18 @@ jobs:
         run: msbuild WindowServiceApp.sln /m /p:Configuration=Release
 
       # 6. Run all xUnit tests
+           # … previous steps …
+
       - name: Run xUnit tests
         run: |
-          dotnet test WindowServicveApp.sln \
+          dotnet test WindeowServiceApp.sln \
             --configuration Release \
             --no-build \
             --logger "trx;LogFileName=TestResults.trx"
 
-      # 7. Upload test results (optional)
       - name: Upload Test Results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v1
         with:
           name: xunit-results
-          path: '**/TestResults.trx'
+          path: '**/TestResults/*.trx'
+
