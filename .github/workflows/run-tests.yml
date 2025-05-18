@@ -22,13 +22,13 @@ jobs:
           restore-keys: nuget-${{ runner.os }}-
 
       - name: Restore packages
-        run: nuget restore WidowServiceApp.sln
+        run: nuget restore WindowServiceApp.sln
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v1
 
       - name: Build solution
-        run: msbuild WidowServiceApp.sln /m /p:Configuration=Release
+        run: msbuild WindowServiceApp.sln /m /p:Configuration=Release
 
       - name: Run xUnit tests
-        run: dotnet test WidowServiceApp.sln --configuration Release --no-build
+        run: dotnet test WindowServiceApp.sln --configuration Release --no-build
