@@ -1,0 +1,51 @@
+name: CI · Build & Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+
+    steps:
+      # 1. Check out the code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Cache NuGet packages for faster restores
+      - name: Cache NuGet packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.sln','**/*.csproj') }}
+          restore-keys: nuget-${{ runner.os }}-
+
+      # 3. Restore all NuGet packages
+      - name: Restore NuGet packages
+        run: nuget restore WindowServiceApp.sln
+
+      # 4. Ensure MSBuild is available
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1
+
+      # 5. Build your solution in Release mode
+      - name: Build solution
+        run: msbuild WindowServiceApp.sln /m /p:Configuration=Release
+
+      # 6. Run all xUnit tests
+      - name: Run xUnit tests
+        run: |
+          dotnet test WindowServicveapp.sln \
+            --configuration Release \
+            --no-build \
+            --logger "trx;LogFileName=TestResults.trx"
+
+      # 7. Upload test results (optional)
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: xunit-results
+          path: '**/TestResults.trx'
